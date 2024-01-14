@@ -6,10 +6,22 @@ function toJS(data){
 }
 
 function getCart(){
-    return localStorage.getItem("cart");
+    if(!localStorage.getItem("cart")){
+        const cart = {
+            products: []
+        }
+        localStorage.setItem("cart", toJSON(cart))
+    }
+    return localStorage.getItem("cart")
 }
 
 function addProduct(product){
+    if(!localStorage.getItem("cart")){
+        const cart = {
+            products: []
+        }
+        localStorage.setItem("cart", toJSON(cart))
+    }
     const cartJSON = localStorage.getItem("cart");
 
     const cartJS = toJS(cartJSON);
